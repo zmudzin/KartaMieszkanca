@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Generowanie Karty Mieszkańca";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="GenerateCard" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="photo">Zdjęcie:</label>
+        <input type="file" name="photo" id="photo" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="firstName">Imię:</label>
+        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Wprowadź imię" required />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Wprowadź nazwisko" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Generuj kartę</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.CardUrl))
+{
+    <div class="mt-4">
+        <h3>Twoja karta mieszkańca:</h3>
+        <img src="@ViewBag.CardUrl" alt="Karta Mieszkańca" class="img-thumbnail" />
+        <p><a href="@ViewBag.CardUrl" download="KartaMieszkanca.png" class="btn btn-success">Pobierz kartę</a></p>
+    </div>
+}

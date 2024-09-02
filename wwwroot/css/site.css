@@ -1,0 +1,42 @@
+/* Przyk³adowe style */
+body {
+    background-color: #f4f4f4; /* T³o strony */
+    color: #333; /* Tekst */
+}
+
+.navbar {
+    background-color: #003d26; /* Kolor t³a paska nawigacji */
+}
+
+.navbar-brand img {
+    height: 50px; /* Wysokoœæ logo */
+}
+
+.btn-primary {
+    background-color: #003d26; /* Kolor t³a przycisków */
+    border-color: #003d26; /* Kolor obramowania przycisków */
+}
+
+    .btn-primary:hover {
+        background-color: #005c43; /* Kolor t³a przycisków po najechaniu */
+        border-color: #005c43; /* Kolor obramowania przycisków po najechaniu */
+    }
+
+.alert-danger {
+    background-color: #f8d7da; /* Kolor t³a dla alertów b³êdów */
+    color: #721c24; /* Kolor tekstu dla alertów b³êdów */
+}
+
+.alert-success {
+    background-color: #d4edda; /* Kolor t³a dla alertów sukcesu */
+    color: #155724; /* Kolor tekstu dla alertów sukcesu */
+}
+
+.form-control {
+    border-color: #003d26; /* Kolor obramowania pól formularza */
+}
+
+.img-thumbnail {
+    border: 1px solid #ddd; /* Kolor obramowania obrazków */
+    border-radius: .25rem; /* Zaokr¹glenie rogów */
+}
