@@ -1,37 +1,95 @@
-﻿@{
-    ViewData["Title"] = "Generowanie Karty Mieszkańca";
-}
+﻿<h2>@ViewData["Title"]</h2>
 
-<h2>@ViewData["Title"]</h2>
+<div class="container">
+    <div class="row">
+        <!-- Sekcja: Generowanie Karty -->
+        <div class="col-md-6">
+            <h3>Generowanie Karty Mieszkańca</h3>
 
-<form asp-action="GenerateCard" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="photo">Zdjęcie:</label>
-        <input type="file" name="photo" id="photo" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="firstName">Imię:</label>
-        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Wprowadź imię" required />
-    </div>
-    <div class="form-group">
-        <label for="lastName">Nazwisko:</label>
-        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Wprowadź nazwisko" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Generuj kartę</button>
-</form>
+            <form asp-action="GenerateCard" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="photo">Zdjęcie:</label>
+                    <input type="file" name="photo" id="photo" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Imię:</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Wprowadź imię" required />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Wprowadź nazwisko" required />
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Numer Karty (opcjonalnie):</label>
+                    <input type="text" name="cardNumber" id="cardNumber" class="form-control" placeholder="Wprowadź numer karty, jeśli chcesz nadpisać istniejącą kartę" />
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Data wpływu wniosku (opcjonalnie):</label>
+                    <input type="date" name="startDate" id="startDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Data wydania karty (opcjonalnie):</label>
+                    <input type="date" name="endDate" id="endDate" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Generuj kartę</button>
+            </form>
+        </div>
 
-@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-{
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.ErrorMessage
+        <!-- Sekcja: Modyfikacja Karty -->
+        <div class="col-md-6">
+            <h3>Modyfikacja Karty Mieszkańca</h3>
+           
+            <form asp-action="EditCardInfo" method="post">
+                <div class="form-group">
+                    <label for="editCardNumber">Numer Karty:</label>
+                    <input type="text" name="cardNumber" id="editCardNumber" class="form-control" placeholder="Wprowadź numer karty do modyfikacji" required />
+                </div>
+                <div class="form-group">
+                    <label for="editFirstName">Nowe Imię (opcjonalnie):</label>
+                    <input type="text" name="firstName" id="editFirstName" class="form-control" placeholder="Wprowadź nowe imię" />
+                </div>
+                <div class="form-group">
+                    <label for="editLastName">Nowe Nazwisko (opcjonalnie):</label>
+                    <input type="text" name="lastName" id="editLastName" class="form-control" placeholder="Wprowadź nowe nazwisko" />
+                </div>
+                <div class="form-group">
+                    <label for="editStartDate">Nowa Data wpływu wniosku (opcjonalnie):</label>
+                    <input type="date" name="startDate" id="editStartDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editEndDate">Nowa Data wydania karty (opcjonalnie):</label>
+                    <input type="date" name="endDate" id="editEndDate" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-secondary">Tylko Modyfikuj</button>
+            </form>
+        </div>
     </div>
-}
 
-@if (!string.IsNullOrEmpty(ViewBag.CardUrl))
-{
-    <div class="mt-4">
-        <h3>Twoja karta mieszkańca:</h3>
-        <img src="@ViewBag.CardUrl" alt="Karta Mieszkańca" class="img-thumbnail" />
-        <p><a href="@ViewBag.CardUrl" download="KartaMieszkanca.png" class="btn btn-success">Pobierz kartę</a></p>
+    <hr />
+
+    <!-- Sekcja: Wyświetlenie karty -->
+    <div class="text-center">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.SuccessMessage
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.CardUrl))
+        {
+            <div class="mt-4">
+                <h3>Twoja karta mieszkańca:</h3>
+                <img src="@ViewBag.CardUrl" alt="Karta Mieszkańca" class="img-thumbnail" style="max-width: 100%; height: auto;" />
+                <p><a href="@ViewBag.CardUrl" download="KartaMieszkanca.png" class="btn btn-success">Pobierz kartę</a></p>
+            </div>
+        }
     </div>
-}
+</div>
