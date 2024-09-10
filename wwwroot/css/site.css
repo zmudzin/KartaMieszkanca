@@ -1,42 +1,157 @@
-/* Przyk³adowe style */
-body {
-    background-color: #f4f4f4; /* T³o strony */
-    color: #333; /* Tekst */
+ï»¿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Jasny szary */
 }
 
-.navbar {
-    background-color: #003d26; /* Kolor t³a paska nawigacji */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* BiaÅ‚y dla lepszej czytelnoÅ›ci */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .navbar-brand img {
-    height: 50px; /* Wysokoœæ logo */
+    height: 100px;
+}
+/* Kolorystyka tÅ‚a w nagÅ‚Ã³wku */
+.navbar {
+    background-color: #31a368; /* Ciemny niebieski */
 }
 
-.btn-primary {
-    background-color: #003d26; /* Kolor t³a przycisków */
-    border-color: #003d26; /* Kolor obramowania przycisków */
+h2 {
+    color: #003d5b; /* Ciemny niebieski */
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 28px; /* ZwiÄ™kszenie wielkoÅ›ci czcionki */
 }
 
-    .btn-primary:hover {
-        background-color: #005c43; /* Kolor t³a przycisków po najechaniu */
-        border-color: #005c43; /* Kolor obramowania przycisków po najechaniu */
+h3 {
+    color: #003d5b; /* Ciemny niebieski */
+    margin-bottom: 15px;
+    font-size: 28px; /* ZwiÄ™kszenie wielkoÅ›ci czcionki */
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Zmiana na wyrÃ³wnanie do lewej */
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; /* KaÅ¼de pole formularza na osobnej linii */
+    margin-bottom: 15px; /* WiÄ™ksza odlegÅ‚oÅ›Ä‡ miÄ™dzy polami */
+    width: 100%; /* Pola rozciÄ…gajÄ… siÄ™ na peÅ‚nÄ… szerokoÅ›Ä‡ kontenera */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #003d5b; /* Ciemny niebieski */
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    width: 100%; /* Pola majÄ… teraz peÅ‚nÄ… szerokoÅ›Ä‡ */
+    box-sizing: border-box; /* Zapewnienie, Å¼e padding nie rozszerza szerokoÅ›ci */
+}
+
+input[type="submit"],
+input[type="reset"],
+button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #e60f23; /* Ciemny niebieski */
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px; /* OdstÄ™p miÄ™dzy przyciskami */
+    transition: background-color 0.3s ease;
+}
+
+    input[type="submit"]:hover,
+    input[type="reset"]:hover,
+    button:hover {
+        background-color: #e60f23; /* Ciemniejszy niebieski */
     }
 
-.alert-danger {
-    background-color: #f8d7da; /* Kolor t³a dla alertów b³êdów */
-    color: #721c24; /* Kolor tekstu dla alertów b³êdów */
+/* Styl dla stopki */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2fa367; /* Ciemny niebieski */
+    color: #ffffff;
 }
 
-.alert-success {
-    background-color: #d4edda; /* Kolor t³a dla alertów sukcesu */
-    color: #155724; /* Kolor tekstu dla alertów sukcesu */
+    footer p {
+        margin: 0;
+        color: #ffffff;
+    }
+
+/* Styl dla tabeli */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.form-control {
-    border-color: #003d26; /* Kolor obramowania pól formularza */
+table, th, td {
+    border: 1px solid #ddd;
 }
 
-.img-thumbnail {
-    border: 1px solid #ddd; /* Kolor obramowania obrazków */
-    border-radius: .25rem; /* Zaokr¹glenie rogów */
+th {
+    background-color: #003d5b; /* Ciemny niebieski */
+    color: white;
 }
+
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+table a {
+    text-decoration: none;
+    color: #003d5b;
+    font-weight: bold;
+}
+
+    table a:hover {
+        text-decoration: underline;
+    }
+
+/* ResponsywnoÅ›Ä‡ */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+}
+.card-counter {
+    background-color: #f8f9fa; /* Jasne tÅ‚o */
+    border: 1px solid #dee2e6; /* Delikatna ramka */
+    border-radius: 5px; /* ZaokrÄ…glone rogi */
+    padding: 15px; /* WewnÄ™trzne marginesy */
+    margin: 15px 0; /* ZewnÄ™trzne marginesy */
+    font-size: 16px; /* Rozmiar czcionki */
+    color: #31a368; /* Kolor tekstu */
+    font-weight: bold; /* Pogrubienie tekstu */
+}
+

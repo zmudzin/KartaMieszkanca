@@ -1,45 +1,42 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KartaMieszkanca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Karta Mieszkańca</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/KartaMieszkanca.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="" asp-action="Index">
-                    <img src="~/cards/banner-1.png" alt="Logo" style="height: 50px;" />
-                </a>
-                @if (ViewBag.LastUsedCardNumber != null)
-                {
-                    <div class="alert alert-info" role="alert">
-                        Ostatnio użyty numer karty: @ViewBag.LastUsedCardNumber
-                    </div>
-                }
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <nav class="navbar">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="@Url.Action("Index")">
+                <img src="~/cards/banner-1.png" alt="Logo" />
+            </a>
+
+            <!-- Licznik kart (Ostatnio użyty numer karty) -->
+            @if (ViewBag.LastUsedCardNumber != null)
+            {
+                <div class="card-counter">
+                    Ostatnio użyty numer karty: @ViewBag.LastUsedCardNumber
+                </div>
+            }
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Karta Mieszkańca</p>
+        </footer>
     </div>
 
-
+    <!-- Bezpośrednie odwołania do plików skryptów -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>

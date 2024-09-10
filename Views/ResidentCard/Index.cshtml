@@ -9,15 +9,15 @@
             <form asp-action="GenerateCard" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="photo">Zdjęcie:</label>
-                    <input type="file" name="photo" id="photo" class="form-control" required />
+                    <input type="file" name="photo" id="photo" class="form-control" aria-required="true" required />
                 </div>
                 <div class="form-group">
                     <label for="firstName">Imię:</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Wprowadź imię" required />
+                    <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Wprowadź imię" aria-required="true" required />
                 </div>
                 <div class="form-group">
                     <label for="lastName">Nazwisko:</label>
-                    <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Wprowadź nazwisko" required />
+                    <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Wprowadź nazwisko" aria-required="true" required />
                 </div>
                 <div class="form-group">
                     <label for="cardNumber">Numer Karty (opcjonalnie):</label>
@@ -31,18 +31,21 @@
                     <label for="endDate">Data wydania karty (opcjonalnie):</label>
                     <input type="date" name="endDate" id="endDate" class="form-control" />
                 </div>
-                <button type="submit" class="btn btn-primary">Generuj kartę</button>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Generuj kartę</button>
+                    <button type="reset" class="btn btn-secondary">Wyczyść</button>
+                </div>
             </form>
         </div>
 
         <!-- Sekcja: Modyfikacja Karty -->
         <div class="col-md-6">
             <h3>Modyfikacja Karty Mieszkańca</h3>
-           
+
             <form asp-action="EditCardInfo" method="post">
                 <div class="form-group">
                     <label for="editCardNumber">Numer Karty:</label>
-                    <input type="text" name="cardNumber" id="editCardNumber" class="form-control" placeholder="Wprowadź numer karty do modyfikacji" required />
+                    <input type="text" name="cardNumber" id="editCardNumber" class="form-control" placeholder="Wprowadź numer karty do modyfikacji" aria-required="true" required />
                 </div>
                 <div class="form-group">
                     <label for="editFirstName">Nowe Imię (opcjonalnie):</label>
@@ -60,7 +63,10 @@
                     <label for="editEndDate">Nowa Data wydania karty (opcjonalnie):</label>
                     <input type="date" name="endDate" id="editEndDate" class="form-control" />
                 </div>
-                <button type="submit" class="btn btn-secondary">Tylko Modyfikuj</button>
+                          <div class="form-buttons">
+                    <button type="submit" class="btn btn-secondary">Tylko Modyfikuj</button>
+                    <button type="reset" class="btn btn-secondary">Wyczyść</button>
+                </div>
             </form>
         </div>
     </div>
@@ -83,13 +89,14 @@
             </div>
         }
 
-        @if (!string.IsNullOrEmpty(ViewBag.CardUrl))
+        @if (!string.IsNullOrEmpty(ViewBag.CardFileName))
         {
             <div class="mt-4">
                 <h3>Twoja karta mieszkańca:</h3>
-                <img src="@ViewBag.CardUrl" alt="Karta Mieszkańca" class="img-thumbnail" style="max-width: 100%; height: auto;" />
-                <p><a href="@ViewBag.CardUrl" download="KartaMieszkanca.png" class="btn btn-success">Pobierz kartę</a></p>
+                <img src="@Url.Action("GetCardImage", "ResidentCard", new { fileName = ViewBag.CardFileName })" alt="Karta Mieszkańca" class="img-thumbnail" />
+                <p><a href="@Url.Action("GetCardImage", "ResidentCard", new { fileName = ViewBag.CardFileName })" download="KartaMieszkanca.png" class="btn btn-success">Pobierz kartę</a></p>
             </div>
         }
+
     </div>
 </div>

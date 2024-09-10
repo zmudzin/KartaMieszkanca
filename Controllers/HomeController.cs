@@ -1,9 +1,5 @@
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml; // Dodaj to using do obs³ugi EPPlus
 
@@ -33,6 +29,18 @@ namespace KartaMieszkanca.Controllers
             int lastUsedCardNumber = GetLastUsedCardNumber();
             ViewBag.LastUsedCardNumber = lastUsedCardNumber;
             return View();
+        }
+        [HttpGet]
+        public IActionResult GetCardImage(string fileName)
+        {
+            var filePath = Path.Combine(_networkFolderPath, fileName);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "image/jpeg"); // Ustaw odpowiedni typ MIME w zale¿noœci od formatu pliku
         }
 
         [HttpPost]
@@ -107,15 +115,7 @@ namespace KartaMieszkanca.Controllers
                     // Zapisz now¹ kartê, nadpisuj¹c istniej¹c¹, jeœli to konieczne
                     card.Save(cardPath, ImageFormat.Jpeg);
 
-                    // Copy to local directory
-                    var localCardPath = Path.Combine(_localFolderPath, cardFileName);
-                    if (System.IO.File.Exists(localCardPath))
-                    {
-                        System.IO.File.Delete(localCardPath);
-                    }
-                    System.IO.File.Copy(cardPath, localCardPath);
-
-                    ViewBag.CardUrl = $"/cards/{cardFileName}";
+                    ViewBag.CardFileName = cardFileName;
 
                     // Dodaj nowy wiersz do pliku Excel
                     AddCardInfoToExcel(formattedCardNumber, firstName, lastName, startDate, endDate);
@@ -185,9 +185,12 @@ namespace KartaMieszkanca.Controllers
             {
                 g.DrawImage(background, 0, 0, cardWidth, cardHeight);
 
-                var photoWidth = 280;
+                // Sta³a wysokoœæ zdjêcia
+                var photoHeight = 350;
+
+                // Proporcjonalna szerokoœæ zdjêcia
                 var aspectRatio = (double)photo.Width / photo.Height;
-                var photoHeight = (int)(photoWidth / aspectRatio);
+                var photoWidth = (int)(photoHeight * aspectRatio);
 
                 var photoRect = new Rectangle(100, 160, photoWidth, photoHeight);
                 g.DrawImage(photo, photoRect);
